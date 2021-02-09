@@ -19,6 +19,7 @@ cd client
 * use the command
 
 ```
+npm install
 
 npm run serve
 
@@ -41,6 +42,7 @@ cd server
 * use the command
 
 ```
+npm install
 
 nodemon node server.js
 
