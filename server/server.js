@@ -20,5 +20,5 @@ app.post('/api/login', (req, res) => {
 
 // create the web server running on hard coded port 3000
 let server = app.listen(3000, function () {
-    console.log('Application running on port 3000');
+    console.log('Application running on localhost:3000');
 });
