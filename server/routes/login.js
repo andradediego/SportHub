@@ -42,7 +42,8 @@ router.post('/login', async (req, res) => {
 		});
 	}
 
-	const token = jwt.sign({ id: user.email}, 'secret');
+	console.log(process.env.ACCESS_TOKEN_SECRET);
+	const token = jwt.sign({ id: user.email}, process.env.ACCESS_TOKEN_SECRET);
 	
 	//generate the cookie
 	res.cookie('jwt', token, {
@@ -59,7 +60,7 @@ router.post('/user', async (req, res) => {
 	try {
 		const cookie = req.cookies['jwt'];
 
-		const claims = jwt.verify(cookie, 'secret');
+		const claims = jwt.verify(cookie, process.env.ACCESS_TOKEN_SECRET);
 
 		if (!claims) {
 			res.status(401).send({
