@@ -1,24 +1,31 @@
 // create express object from express module
-let express = require('express');
-
+const express = require('express');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 
 // create body parser object from body-parser package
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 // call express constructor to create express application object
-let app = express();
+const app = express();
+
+// imports of routes
+const login = require('./routes/login');
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(cookieParser());
+// set the cors
+app.use(cors({
+	credentials: true,
+	origin: ['http://localhost:8080']
+}));
 
-
-app.post('/api/login', (req, res) => {     
-	return res.json('It is working');
-});
-
+//set the routes
+app.use('/api', login);
 
 // create the web server running on hard coded port 3000
-let server = app.listen(3000, function () {
+const server = app.listen(3000, function () {
     console.log('Application running on localhost:3000');
 });
