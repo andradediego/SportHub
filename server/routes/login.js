@@ -1,59 +1,126 @@
 const router = require('express').Router();
 const bycrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const sql = require("mssql");
 
-const db = [];
+const config = {
+	user: 'sa',
+	password: '123456',
+	server: 'NERDJESTER-NOTE\\SQLEXPRESS',
+	database: 'SportHub'
+};
 
-// register
-router.post('/register', async (req, res) => {
-	const salt = await bycrypt.genSalt(10);
-	const hashedPassword = await bycrypt.hash(req.body.password, salt);   
-	
-	const newUser = {
-		name: req.body.name,
-		email: req.body.email,
-		password: hashedPassword
-	};
 
-	db.push(newUser);	
+router.post('/register', async (req, res) => {	
+	let pool = await sql.connect(config);
+	try {
+		const data = req.body;
 
-	return res.json({
-		message: 'It is working',
-		newUser
-	});
+		if (!(data || data.name || data.email || data.password)) {
+			return res.status(400).send({
+				message: 'Invalid data'
+			});
+		}
+
+		let {recordset} = await pool.request()
+			.input('email', sql.NVarChar(50), data.email)
+			.query('select * from Login where email = @email');
+
+		if (recordset.length > 0) {
+			return res.status(400).send({
+				message: 'User already register'
+			});
+		}
+
+		const salt = await bycrypt.genSalt(10);
+		const hashedPassword = await bycrypt.hash(data.password, salt);
+
+		console.log(hashedPassword.length);
+
+		const insertQuery = `
+			insert into Login (name, email, password) 
+			values (@name, @email, @password); 
+			SELECT SCOPE_IDENTITY() AS id;
+		`
+
+		let newUser = await pool.request()
+			.input('name', sql.NVarChar(50), data.name)
+			.input('email', sql.NVarChar(50), data.email)
+			.input('password', sql.NVarChar(100), hashedPassword)
+			.query(insertQuery);
+
+			if (newUser.recordset.length == 0) {
+				return res.status(500).send({
+					message: 'Sorry we cannot process your data right now, please try again later'
+				});
+			}
+
+		return res.json({
+			message: 'Register was succesfull',
+			user: {
+				name: data.name,
+				login: data.login,
+			}
+		});
+		
+	} catch (error) {
+		return res.status(500).send({
+			message: error.message
+		});
+	} finally {
+		pool.close();
+	}
 });
 
 
-router.post('/login', async (req, res) => {
-	
-	const user = db.find(element => {
-		return element.email === req.body.email;
-	});
-	
-	if (!user) {
-		res.status(404).send({
-			message: 'user not found!'
-		});
-	}
-	
-	if (!await bycrypt.compare(req.body.password, user.password)) {
-		res.status(400).send({
-			message: 'invalid credentials!'
-		});
-	}
+router.post('/login', async (req, res) => {	
+	let pool = await sql.connect(config);
 
-	console.log(process.env.ACCESS_TOKEN_SECRET);
-	const token = jwt.sign({ id: user.email}, process.env.ACCESS_TOKEN_SECRET);
-	
-	//generate the cookie
-	res.cookie('jwt', token, {
-		httpOnly: true,
-		maxAge: 24 * 60 * 60 * 1000 // 1 day
-	});
+	try {
+		const data = req.body;
 
-	return res.json({
-		message: 'User authenticated!'
-	});
+		if (!(data || data.email || data.password)) {
+			return res.status(400).send({
+				message: 'Invalid data'
+			});
+		}
+		
+		let { recordset } = await pool.request()
+			.input('email', sql.NVarChar(50), data.email)
+			.query('select * from Login where email = @email');
+
+		console.log(recordset);
+
+		if (recordset.length != 1) {
+			return res.status(400).send({
+				message: 'User not found'
+			});
+		}
+		
+		if (!await bycrypt.compare(data.password, recordset[0].Password)) {
+			return res.status(400).send({
+				message: 'Invalid credentials!'
+			});
+		}	
+		
+		const token = jwt.sign({ id: recordset[0].Email}, process.env.ACCESS_TOKEN_SECRET);
+		
+		//generate the cookie
+		res.cookie('jwt', token, {
+			httpOnly: true,
+			maxAge: 24 * 60 * 60 * 1000 // 1 day
+		});
+
+		return res.json({
+			message: 'User authenticated!'
+		});		
+	} catch (error) {
+		return res.status(500).send({
+			message: error.message
+		});
+	} finally {
+		pool.close();
+	}
 });
 
 router.post('/user', async (req, res) => {
@@ -63,14 +130,14 @@ router.post('/user', async (req, res) => {
 		const claims = jwt.verify(cookie, process.env.ACCESS_TOKEN_SECRET);
 
 		if (!claims) {
-			res.status(401).send({
+			return res.status(401).send({
 				message: 'Unauthenticated!'
 			});
 		}
 
-		res.send(claims);
+		return res.send(claims);
 	} catch (error) {
-		res.status(401).send({
+		return res.status(401).send({
 			message: 'Unauthenticated!'
 		});
 	}
