@@ -35,8 +35,6 @@ router.post('/register', async (req, res) => {
 		const salt = await bycrypt.genSalt(10);
 		const hashedPassword = await bycrypt.hash(data.password, salt);
 
-		console.log(hashedPassword.length);
-
 		const insertQuery = `
 			insert into Login (name, email, password) 
 			values (@name, @email, @password); 
@@ -88,8 +86,6 @@ router.post('/login', async (req, res) => {
 		let { recordset } = await pool.request()
 			.input('email', sql.NVarChar(50), data.email)
 			.query('select * from Login where email = @email');
-
-		console.log(recordset);
 
 		if (recordset.length != 1) {
 			return res.status(400).send({
