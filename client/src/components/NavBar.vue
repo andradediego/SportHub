@@ -1,28 +1,12 @@
 <template>
 	<v-app-bar
 		app
-		color="primary"
+		color="#13893f"
 		dark
 	>
-		<div class="d-flex align-center">
-			<v-img
-				alt="Vuetify Logo"
-				class="shrink mr-2"
-				contain
-				src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-				transition="scale-transition"
-				width="40"
-			/>
-
-			<v-img
-				alt="Vuetify Name"
-				class="shrink mt-1 hidden-sm-and-down"
-				contain
-				min-width="100"
-				src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-				width="100"
-			/>
-		</div>
+	<div style="font-size:30px; padding-left:20px; letter-spacing:2px;">
+		<span><b>SPORT</b></span><span style="color:#fda733"><b>HUB</b></span>
+	</div>
 
 		<v-spacer></v-spacer>		
 		<v-btn			
@@ -34,7 +18,27 @@
 		</v-btn>
 		<v-btn			
 			text
-			@click="onLoginClick"
+			@click="onAboutClick"
+		>
+			<span class="mr-2">About</span>
+			
+		</v-btn>
+		<v-btn			
+			text
+			@click="onProductClick"
+		>
+			<span class="mr-2">Product</span>
+			
+		</v-btn>
+		<v-btn
+			text
+			@click="onRegisterClick"
+		>
+					<span class="mr-2">Register</span>
+		</v-btn>
+		<v-btn			
+			text
+			@click="onLoginClick" 
 		>
 			<span class="mr-2">Login</span>
 			<v-icon>mdi-account-circle</v-icon>
@@ -48,6 +52,15 @@ export default {
 		onHomeClick: function () {
 			this.$router.push('/');			
 		},
+		onAboutClick: function () {
+			this.$router.push('/about');
+		},
+		onProductClick: function () {
+			this.$router.push('/product');
+		},
+		onRegisterClick: function () {
+			this.$router.push('/register');
+		},
 		onLoginClick: function () {
 			this.$router.push('/login');
 		}
@@ -55,5 +68,5 @@ export default {
 }
 </script>
 <style >
-	
+
 </style>

@@ -4,7 +4,7 @@
       <NavBar/>
       <v-container>
         <v-fade-transition leave-absolute>
-          <router-view></router-view>        
+          <router-view></router-view>      
         </v-fade-transition>
       </v-container>      
     </v-main>
@@ -18,7 +18,7 @@ export default {
   name: 'App',
 
   components: {
-    NavBar
+    NavBar,
   },
 
   data: () => ({
@@ -26,3 +26,6 @@ export default {
   })
 };
 </script>
+<style>
+
+</style>

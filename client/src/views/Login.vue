@@ -83,6 +83,7 @@ export default {
       }
 
       this.onLogin(userData);
+      this.$router.push('/profile');
     }
   }
 }
