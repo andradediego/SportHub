@@ -1,4 +1,4 @@
-export default {
-	isLoggedIn: false,
+export const loginState = {
+	isAuthenticated: false,
 	user: {}
 }

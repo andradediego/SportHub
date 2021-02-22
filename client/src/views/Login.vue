@@ -8,12 +8,7 @@
       lg="4"
       offset-lg="4"
       >
-      <v-card>
-
-       <!-- <v-card-title>          
-        <span>Login</span>  
-       </v-card-title> -->
-       
+      <v-card>       
        <v-card-text>
         <v-row>
           <v-col cols="12">            
@@ -64,7 +59,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 export default {
   name: 'Login',
   components: {    
@@ -81,9 +76,8 @@ export default {
         email: this.email,
         password: this.password
       }
-
+      
       this.onLogin(userData);
-      this.$router.push('/profile');
     }
   }
 }

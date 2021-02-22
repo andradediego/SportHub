@@ -24,7 +24,6 @@ const actions = {
   ...loginActions
 };
 
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({

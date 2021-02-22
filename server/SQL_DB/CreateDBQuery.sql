@@ -1,5 +1,5 @@
 -- New block of code
-DROP DATABASE IF EXISTS [SportHub]
+DROP DATABASE IF EXISTS [SportHub];
 GO
 
 CREATE DATABASE [SportHub];
