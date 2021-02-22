@@ -20,7 +20,7 @@
 			text
 			@click="onAboutClick"
 		>
-			<span class="mr-2">About</span>
+		<span class="mr-2">About</span>
 			
 		</v-btn>
 		<v-btn			
