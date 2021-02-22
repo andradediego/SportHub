@@ -2,6 +2,7 @@ const router = require('express').Router();
 const bycrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sql = require("mssql");
+const checkAuthentication = require('./checkAuthentication');
 
 const config = {
 	user: 'sa',
@@ -11,8 +12,7 @@ const config = {
 };
 
 
-router.post('/register', async (req, res) => {	
-	let pool = await sql.connect(config);
+router.post('/register', async (req, res) => {		
 	try {
 		const data = req.body;
 
@@ -71,7 +71,7 @@ router.post('/register', async (req, res) => {
 });
 
 
-router.post('/login', async (req, res) => {	
+router.post('/login',  async (req, res) => {	
 	let pool = await sql.connect(config);
 
 	try {
@@ -119,17 +119,12 @@ router.post('/login', async (req, res) => {
 	}
 });
 
-router.post('/user', async (req, res) => {
-	try {
+router.post('/checkAuthenticationStatus', checkAuthentication, async (req, res) => {
+	try {	
+
 		const cookie = req.cookies['jwt'];
 
 		const claims = jwt.verify(cookie, process.env.ACCESS_TOKEN_SECRET);
-
-		if (!claims) {
-			return res.status(401).send({
-				message: 'Unauthenticated!'
-			});
-		}
 
 		return res.send(claims);
 	} catch (error) {
@@ -140,6 +135,7 @@ router.post('/user', async (req, res) => {
 });
 
 router.post('/logout', async (req, res) => {
+	
 	res.cookie('jwt', '', {		
 		maxAge: 0
 	});

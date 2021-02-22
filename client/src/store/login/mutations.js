@@ -1,3 +1,3 @@
-export const setIsLoggedIn = (state, payload) => {
-	state.isLoggedIn = payload;
+export const setIsAuthenticated = (state, payload) => {	
+	state.loginState.isAuthenticated = payload;
 }

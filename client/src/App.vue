@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import NavBar from './components/NavBar.vue';
 
 export default {
@@ -23,7 +24,13 @@ export default {
 
   data: () => ({
     //
-  })
+  }),
+  methods: {
+    ...mapActions(['checkAuthenticationStatus']),
+  },
+  mounted() {
+    this.checkAuthenticationStatus();
+  }
 };
 </script>
 <style>

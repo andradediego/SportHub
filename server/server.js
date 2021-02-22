@@ -23,7 +23,7 @@ app.use(cors({
 }));
 
 //set the routes
-app.use('/api', login);
+app.use('/api/login', login);
 
 // create the web server running on hard coded port 3000
 const server = app.listen(3000, function () {
