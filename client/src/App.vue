@@ -23,8 +23,6 @@ export default {
   },
 
   data: () => ({
-    name: 'Diego',
-    lastName: 'Andrade'
   }),
   methods: {
     ...mapActions(['checkAuthenticationStatus']),
