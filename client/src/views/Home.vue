@@ -9,11 +9,7 @@
       color="#13893f"
     >
       <v-toolbar-title>Location selection</v-toolbar-title>
-      <v-autocomplete
-        v-model="select"
-        :loading="loading"
-        :items="items"
-        :search-input.sync="search"
+      <v-autocomplete             
         cache-items
         class="mx-4"
         flat
@@ -26,8 +22,7 @@
   </div>
   <div class="right">
       <v-date-picker
-        float=right
-        v-model="picker"
+        float=right        
         color="#13893f"
        
       ></v-date-picker>
@@ -72,8 +67,3 @@ export default {
   max-width:92%;
 }
 </style>
-<script>
-export default {
-  name: 'Home',
-}
-</script>
