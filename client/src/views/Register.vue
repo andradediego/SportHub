@@ -1,71 +1,94 @@
 <template>
-  <div class="submitForm">
-    <form>
-     <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Your full name</label>
-        <input type="text" class="form-control" required>
-    </div>    
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control"   required>
-    </div>
-   
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" required>
-    </div>
-    
-    <button type="submit" class="btn btn-color">Submit</button>
-    </form>
-  </div>
+  <v-row>
+    <v-col
+      xs="12"
+      sm="12"
+      md="6"
+      offset-md="3"
+      lg="4"
+      offset-lg="4"
+      >
+      <v-card>       
+       <v-card-text>
+        <v-row>
+          <v-col cols="12">    
+            <v-text-field
+              label="Full Name"
+              v-model="name"
+            >
+            </v-text-field>
+             <v-text-field
+              label="Confirm E-mail"
+              v-model="email"
+            >
+            </v-text-field>
+            <v-text-field
+              label="Password"
+              :append-icon="displayPassword ? 'mdi-eye' : 'mdi-eye-off'"              
+              :type="displayPassword ? 'text' : 'password'"
+              class="input-group--focused"
+            @click:append="displayPassword = !displayPassword"
+              v-model="password"
+            >
+            </v-text-field>
+          </v-col>
+        </v-row>
+       </v-card-text>
+       
+       <v-card-actions>
+         <v-row>
+          <v-col cols="12">            
+            <v-btn block color="success" 
+            @click="onRegisterClick" >
+              Register
+            </v-btn>
+          </v-col>
+          <v-col cols="12">            
+             <v-btn block color="primary"
+              @click="onClickHome">
+              Back
+            </v-btn>
+          </v-col>
+          
+        </v-row>        
+       </v-card-actions>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-//import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
   name: 'Register',
-  components: {},
-  /*data() {
-    return {
-      form: {
-        username: "",
-        full_name: "",
-        password: "",
-      },
-      showError: false
-    };
+  components: {    
   },
+  data: () => ({
+    name: '',
+    email: '',
+    password:'',
+    displayPassword: false
+  }),
   methods: {
-    ...mapActions(["Register"]),
-    async submit() {
-      try {
-        await this.Register(this.form);
-        this.$router.push("/posts");
-        this.showError = false
-      } catch (error) {
-        this.showError = true
+   ...mapActions(['onRegister']),
+    onRegisterClick: function () {
+      const userData = {
+        name: this.name,
+        email: this.email,
+        password: this.password
       }
+      
+      this.onRegister(userData);
     },
-     
-  },*/
-};
+    onClickHome: function () {	
+			if (this.currentRouteName != 'Home') {
+				this.$router.push('/Login');
+			}		
+    }
+  }
+}
+
 </script>
 
-<style>
-.submitForm{
-margin:0 auto;
-width: 30%;
-justify-content: flex-start;
-align-items: center;
-justify-content: center;
-color: black;
-border: solid 1px gainsboro;
-border-radius: 10px;
-padding:20px;
-}
-.btn-color{
-    background:#13893f;
-    color:white;
-}
-</style>
+
 

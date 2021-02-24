@@ -2,9 +2,9 @@ POST http://localhost:3000/api/login/register
 Content-Type: application/json
 
 {
-	"name": "Diego Andrade",
-	"email": "diego@gmail.com",
-	"password": "123456"
+	"name": "Guilherme",
+	"email": "gdchiamulera@gmail.com",
+	"password": "12345678"
 }
 
 ###
@@ -13,8 +13,8 @@ POST http://localhost:3000/api/login/login
 Content-Type: application/json
 
 {    
-	"email": "diego@gmail.com",
-	"password": "123456"
+	"email": "gdchiamulera@gmail.com",
+	"password": "12345678"
 }
 
 ###

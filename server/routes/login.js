@@ -3,16 +3,30 @@ const bycrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sql = require("mssql");
 const checkAuthentication = require('./checkAuthentication');
-
+/*
 const config = {
 	user: 'sa',
 	password: '123456',
 	server: 'NERDJESTER-NOTE\\SQLEXPRESS',
 	database: 'SportHub'
+};*/
+
+//Guilherme Config
+const config = {
+	user: 'sa',
+	password: '12345678',
+	server: 'DESKTOP-0Q3IKPE\\SPORTHUB',
+	database: 'SportHub',
+	options:{
+		enableArithAbort: true
+	}
 };
 
 
-router.post('/register', async (req, res) => {		
+
+
+router.post('/register', async (req, res) => {
+	let pool = await sql.connect(config);		
 	try {
 		const data = req.body;
 
@@ -76,6 +90,7 @@ router.post('/login',  async (req, res) => {
 
 	try {
 		const data = req.body;
+		//console.log(data);
 
 		if (!(data || data.email || data.password)) {
 			return res.status(400).send({
@@ -86,7 +101,7 @@ router.post('/login',  async (req, res) => {
 		let { recordset } = await pool.request()
 			.input('email', sql.NVarChar(50), data.email)
 			.query('select * from Login where email = @email');
-
+		//console.log(recordset);
 		if (recordset.length != 1) {
 			return res.status(400).send({
 				message: 'User not found'

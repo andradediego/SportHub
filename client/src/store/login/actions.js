@@ -34,9 +34,30 @@ export const checkAuthenticationStatus = async ({commit}) => {
 		const result = await axios.post('http://localhost:3000/api/login/checkAuthenticationStatus');
 		
 		if (result) {
-			commit('setIsAuthenticated', true);			
+			commit('setIsAuthenticated', true);		
 		}
 	} catch (error) {
 		console.log(error);
+	}
+}
+
+export const onRegister = async ({commit}, payload) => {
+	try {
+		const result = await axios.post('http://localhost:3000/api/login/register', {
+			name: payload.name,
+			email: payload.email,
+			password: payload.password,
+		});
+		
+		if (result) {
+			commit('setIsAuthenticated', true);
+			router.push('/');
+			
+		console.log("SUCESS");
+		}
+	} catch (error) {
+		console.log(error);
+		
+		console.log("ERRORR");
 	}
 }

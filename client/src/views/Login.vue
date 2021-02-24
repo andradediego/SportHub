@@ -1,6 +1,7 @@
 <template>
   <v-row>
-    <v-col     
+    <v-col
+      xs="12"
       sm="12"
       md="6"
       offset-md="3"
@@ -45,8 +46,9 @@
           <v-divider class="mx-4"></v-divider> 
           -->
           <v-col cols="12">            
-            <v-btn block color="success">
-              Create Account
+            <v-btn block color="success" 
+            @click="addRecord" >
+              Register
             </v-btn>
           </v-col>
           
@@ -64,8 +66,8 @@ export default {
   components: {    
   },
   data: () => ({
-    email: 'diego@gmail.com',
-    password:'123456',
+    email: '',
+    password:'',
     displayPassword: false
   }),
   methods: {
@@ -77,6 +79,11 @@ export default {
       }
       
       this.onLogin(userData);
+    },
+    addRecord: function () {	
+			if (this.currentRouteName != 'Register') {
+				this.$router.push('/register');
+			}		
     }
   }
 }
