@@ -3,24 +3,25 @@ const bycrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sql = require("mssql");
 const checkAuthentication = require('./checkAuthentication');
-/*
+
+ // Diego
 const config = {
 	user: 'sa',
 	password: '123456',
 	server: 'NERDJESTER-NOTE\\SQLEXPRESS',
 	database: 'SportHub'
-};*/
+};
 
 //Guilherme Config
-const config = {
-	user: 'sa',
-	password: '12345678',
-	server: 'DESKTOP-0Q3IKPE\\SPORTHUB',
-	database: 'SportHub',
-	options:{
-		enableArithAbort: true
-	}
-};
+// const config = {
+// 	user: 'sa',
+// 	password: '12345678',
+// 	server: 'DESKTOP-0Q3IKPE\\SPORTHUB',
+// 	database: 'SportHub',
+// 	options:{
+// 		enableArithAbort: true
+// 	}
+// };
 
 
 
