@@ -44,7 +44,7 @@ cd server
 ```
 npm install
 
-nodemon node server.js
+nodemon server.js
 
 ```
 

@@ -1,7 +1,6 @@
 <template>
   <v-row>
-    <v-col
-      xs="12"
+    <v-col     
       sm="12"
       md="6"
       offset-md="3"
