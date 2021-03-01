@@ -3,27 +3,7 @@ const bycrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sql = require("mssql");
 const checkAuthentication = require('./checkAuthentication');
-
- // Diego
-const config = {
-	user: 'sa',
-	password: '123456',
-	server: 'NERDJESTER-NOTE\\SQLEXPRESS',
-	database: 'SportHub'
-};
-
-//Guilherme Config
-// const config = {
-// 	user: 'sa',
-// 	password: '12345678',
-// 	server: 'DESKTOP-0Q3IKPE\\SPORTHUB',
-// 	database: 'SportHub',
-// 	options:{
-// 		enableArithAbort: true
-// 	}
-// };
-
-
+const config = require('../db_connection/connectionString');
 
 
 router.post('/register', async (req, res) => {
@@ -87,6 +67,7 @@ router.post('/register', async (req, res) => {
 
 
 router.post('/login',  async (req, res) => {	
+	
 	let pool = await sql.connect(config);
 
 	try {
@@ -136,8 +117,7 @@ router.post('/login',  async (req, res) => {
 });
 
 router.post('/checkAuthenticationStatus', checkAuthentication, async (req, res) => {
-	try {	
-
+	try {
 		const cookie = req.cookies['jwt'];
 
 		const claims = jwt.verify(cookie, process.env.ACCESS_TOKEN_SECRET);
