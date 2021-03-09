@@ -12,28 +12,52 @@ const fields = [
     src:"http://www.gcfclondon.com/images/fields-2.jpg"
 },
  {  id:'3',
-    name:'CD',
-    location:'ABC',
-    description: 'THHT',
-    src:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+    name:'Norm Aldridge Field',
+    location:'1221 Sandford St',
+    description: 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+    src:"http://www.gcfclondon.com/images/fields-2.jpg"
 },
  {  id:'4',
-    name:'CD',
-    location:'ABC',
-    description: 'THHT',
-    src:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+    name:'Dan Pulham Field',
+    location:'815 Windermere Rd',
+    description: 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+    src:"http://www.gcfclondon.com/images/fields-2.jpg"
 },
  {  id:'5',
-    name:'CD',
-    location:'ABC',
-    description: 'THHT',
-    src:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+    name:'North London Soccer Fields',
+    location:'Windermere Rd &, Adelaide St N    ',
+    description: 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+    src:"http://www.gcfclondon.com/images/fields-2.jpg"
 },
  {  id:'6',
-    name:'CD',
-    location:'ABC',
-    description: 'THHT',
-    src:"https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+    name:'McMahen Park Baseball Diamond',
+    location:'640 Adelaide St N',
+    description: 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+    src:"http://www.gcfclondon.com/images/fields-2.jpg"
+},
+{  id:'7',
+    name:'Marconi Club of London - Soccer Field',
+    location:'315 Marconi Blvd',
+    description: 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+    src:"http://www.gcfclondon.com/images/fields-2.jpg"
+},
+{  id:'8',
+    name:'London United Fields',
+    location:'1300 Oxford St E',
+    description: 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+    src:"http://www.gcfclondon.com/images/fields-2.jpg"
+},
+{  id:'9',
+    name:'Meadowgate Soccer Fields',
+    location:'3155 Meadowgate Blvd',
+    description: 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+    src:"http://www.gcfclondon.com/images/fields-2.jpg"
+},
+{  id:'10',
+    name:'Ted Earley',
+    location:'1375 Clarke Rd',
+    description: 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book',
+    src:"http://www.gcfclondon.com/images/fields-2.jpg"
 },
 ]
 export default fields
