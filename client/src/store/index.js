@@ -8,20 +8,31 @@ import * as loginGetters from './login/getters';
 import * as loginState from './login/state';
 
 
+//login module
+import * as profileActions from './profile/actions';
+import * as profileMutations from './profile/mutations';
+import * as profileGetters from './profile/getters';
+import * as profileState from './profile/state';
+
+
 const state = {
-  ...loginState
+  ...loginState,
+  ...profileState
 };
 
 const mutations = {
-  ...loginMutations
+  ...loginMutations,
+  ...profileMutations
 };
 
 const getters = {
-  ...loginGetters
+  ...loginGetters,
+  ...profileGetters
 };
 
 const actions = {
-  ...loginActions
+  ...loginActions,
+  ...profileActions
 };
 
 Vue.use(Vuex)

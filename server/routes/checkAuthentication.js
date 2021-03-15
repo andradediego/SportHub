@@ -8,6 +8,8 @@ function checkAuthentication(req, res, next) {
 
 		const claims = jwt.verify(cookie, process.env.ACCESS_TOKEN_SECRET);
 
+		req.userData = claims;
+
 		if (!claims) {
 			return res.status(401).send({
 				message: 'Unauthenticated!'
