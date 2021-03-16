@@ -13,9 +13,21 @@
    </div>
 </template>
 <script>
-import fields from '../../data/fields.js'
+//import fields from '../../data/fields.js'
 import FieldCard from './FieldCard.vue'
-
+import {mapState} from 'vuex'
+export default {
+    name: 'Product',
+    components: {
+    FieldCard
+    },
+    mounted(){
+        this.$store.dispatch('loadFields')
+    }, 
+    props:['field'],
+    computed: mapState(['fields'])
+}
+/*
 export default {
 name: 'Product',
 components: {
@@ -24,7 +36,7 @@ FieldCard
 data: () => ({
     fields : fields
 })
-}
+}*/
 </script>
 <style scoped>
 

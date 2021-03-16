@@ -6,22 +6,29 @@ import * as loginActions from './login/actions';
 import * as loginMutations from './login/mutations';
 import * as loginGetters from './login/getters';
 import * as loginState from './login/state';
-
+import * as FieldActions from './fields/actions';
+import * as FieldMutations from './fields/mutations';
+import * as FieldGetters from './fields/getters';
+import * as FieldState from './fields/state';
 
 const state = {
-  ...loginState
+  ...loginState,
+  ...FieldState
 };
 
 const mutations = {
-  ...loginMutations
+  ...loginMutations,
+  ...FieldMutations
 };
 
 const getters = {
-  ...loginGetters
+  ...loginGetters,
+  ...FieldGetters
 };
 
 const actions = {
-  ...loginActions
+  ...loginActions,
+  ...FieldActions
 };
 
 Vue.use(Vuex)

@@ -25,14 +25,17 @@
         </v-card>
 </template>
 <script>
-
+import {mapActions} from 'vuex'
 export default {
     name: 'field',
-    props:['field'],
-    computed:{
-        description(){
-            return this.field.description.substring(0,150)
-        }
+    data: ()=>({
+        
+    }),
+    methods:{
+    ...mapActions(['loadFields']),
+    onclickProduct: function(){
+        //
+    }
     }
 }
 </script>
