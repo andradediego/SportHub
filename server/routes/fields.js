@@ -8,7 +8,7 @@ router.post('/product', async (req, res) => {
 	try {
 
 		let { recordset } = await pool.request()
-			.query('select * from Fields');    
+			.query('select * from Fields where Inactive = 0');    
 		
 		return res.json({
 			message: 'I got it',
