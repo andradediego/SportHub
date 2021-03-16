@@ -1,4 +1,4 @@
-export const FieldState = {
+export const fieldState = {
 	fieldGetter: false,
-	fields: {}
+	fields: []
 }

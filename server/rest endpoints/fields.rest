@@ -2,7 +2,7 @@ POST http://localhost:3000/api/fields/product
 Content-Type: application/json
 
 {
-	"name": "Diego Andrade",
-	"email": "diego@gmail.com",
-	"password": "123456"
+	
 }
+
+###
