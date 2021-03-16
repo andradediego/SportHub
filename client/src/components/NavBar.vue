@@ -26,13 +26,13 @@
 				announcement
 			</span>
 		</v-btn>
-		<!-- <v-btn			
+		<v-btn			
 			text
 			@click="onProductClick"
 		>
 			<span class="mr-2">Product</span>
 			
-		</v-btn> -->
+		</v-btn> 
 		<!-- <v-btn
 			text
 			@click="onRegisterClick"
