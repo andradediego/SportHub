@@ -4,5 +4,6 @@ export const profileState = {
 		about: '',
 		sports: []
 	},
+	sports: [],
 	isEditMode: false
 }

@@ -1,6 +1,5 @@
 <template>
-	<v-col      
-      >
+	<v-col>
       <v-card flat>       
        <v-card-text>
         <v-row>
@@ -18,7 +17,7 @@
 						></v-textarea>
 						<v-combobox						
 							label="Interests"
-							:items="sports"
+							:items="sportsData"
               item-text="sport" 
               v-model="sportsSelected"
 							multiple
@@ -48,7 +47,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapActions, mapGetters } from 'vuex';
 export default {
   name: 'EditProfile',  
   data: () => ({
@@ -57,24 +56,34 @@ export default {
     sportsSelected: []
   }),
   computed: {
+    ...mapGetters(['sportsData']),
     sports: function () {
       return ['Baseball', 'Basketball', 'Hockey', 'Soccer', 'Football'];
     }
   },
   methods: {
     ...mapMutations(['setIsEditMode']),
+    ...mapActions(['onUpdateUserData', 'onGetSports']),
     onUpdateProfile: function () {
-			alert(1);
+      const data = {
+        name: this.name,
+        about: this.about,
+        sports: this.sportsSelected.map((element) => element.id)
+      }
+      
+			this.onUpdateUserData(data);      
 		},
 		onCancelUpdateProfile: function () {
 			this.setIsEditMode(false);
 		}
   },
   mounted() {
-    let userProfile = this.$store.getters.userProfile;
+    const userProfile = this.$store.getters.userProfile;
     this.name = userProfile.name;
     this.about = userProfile.about;
     this.sportsSelected = userProfile.sports;
+
+    this.onGetSports();
   }
 };
 </script>

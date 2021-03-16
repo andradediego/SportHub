@@ -88,6 +88,9 @@ export default {
 		},
 		onLogoutClick: function () {
 			this.onLogout();
+				if (this.currentRouteName != 'Home') {
+				this.$router.push('/');
+			}	
 		},
 		// onRegisterClick: function () {
 		// 	if (this.currentRouteName != 'Register') {
