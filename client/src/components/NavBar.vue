@@ -26,13 +26,13 @@
 			<v-icon>mdi-account-box</v-icon>
 		</v-btn>
 
-		<v-btn			
+		<!-- <v-btn			
 			text
 			@click="onCalendarClick"
 		>
 			<span class="mr-2">Calendar</span>
 			
-		</v-btn> 
+		</v-btn>  -->
 		
 		<v-btn			
 			text
@@ -122,6 +122,7 @@ export default {
 			if (this.currentRouteName != 'Calendar') {
 				this.$router.push('/calendar');
 			}
+		}
 	}
 }
 </script>

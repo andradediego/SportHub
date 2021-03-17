@@ -2,6 +2,7 @@ import axios from 'axios';
 // import router from '../../router';
 
 export const loadFields = async ({commit}) => {
+	debugger;
 	try {
 		const result = await axios.post('http://localhost:3000/api/fields/product');		
 		if (result) {
