@@ -17,12 +17,12 @@
         <div class="text-h4 text-center">Our Product</div>
         <br>
         <v-row>            
-            <template v-for="product in products" > 
+            <template v-for="about in abouts" > 
                 <v-col
                     cols="12"
                     xs="12"
                     sm="6"                    
-                    :key="product"
+                    :key="about"
                     >           
                 <v-card                
                     dark            
@@ -30,7 +30,7 @@
                     class="mx-auto pa-2"                    
                     width="500">
                     <v-card-text>
-                        <div >{{product}}</div>
+                        <div >{{about}}</div>
                     </v-card-text>
                 </v-card>
                 </v-col>
@@ -48,7 +48,7 @@
 export default {
 name: 'About',
 data: () => ({
-    products: [
+    abouts: [
         'The app is specifically designed for sporting events',
         'Facilitating the process of finding free sports fields',
         'Booking sports fields available',

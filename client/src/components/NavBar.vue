@@ -25,6 +25,14 @@
 			<span class="mr-2">Profile</span>
 			<v-icon>mdi-account-box</v-icon>
 		</v-btn>
+
+		<v-btn			
+			text
+			@click="onProductClick"
+		>
+			<span class="mr-2">Product</span>
+			
+		</v-btn> 
 		<v-btn			
 			text
 			@click="onLoginClick" 
