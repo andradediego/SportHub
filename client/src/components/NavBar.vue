@@ -28,6 +28,14 @@
 
 		<v-btn			
 			text
+			@click="onCalendarClick"
+		>
+			<span class="mr-2">Calendar</span>
+			
+		</v-btn> 
+		
+		<v-btn			
+			text
 			@click="onProductClick"
 		>
 			<span class="mr-2">Product</span>
@@ -109,7 +117,11 @@ export default {
 			if (this.currentRouteName != 'Login') {
 				this.$router.push('/login');
 			}		
-		}
+		},
+		onCalendarClick: function () {	
+			if (this.currentRouteName != 'Calendar') {
+				this.$router.push('/calendar');
+			}
 	}
 }
 </script>
