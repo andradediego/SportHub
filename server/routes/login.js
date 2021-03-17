@@ -104,9 +104,13 @@ router.post('/login',  async (req, res) => {
 			maxAge: 24 * 60 * 60 * 1000 // 1 day
 		});
 
+		console.log(recordset);
 		return res.json({
-			message: 'User authenticated!'
-		});		
+			message: 'User authenticated!',
+			data: {
+				isAdmin: recordset[0].IsAdmin
+			}
+			});		
 	} catch (error) {
 		return res.status(500).send({
 			message: error.message

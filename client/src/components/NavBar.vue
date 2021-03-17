@@ -31,14 +31,15 @@
 			@click="onProductClick"
 		>
 			<span class="mr-2">Product</span>
-			
+			<v-icon>mdi-map</v-icon>
 		</v-btn> 
-		<!-- <v-btn
+		<v-btn			
 			text
-			@click="onRegisterClick"
-		>
-					<span class="mr-2">Register</span>
-		</v-btn> -->
+			@click="onProdAdminClick" 
+			v-if="isAuthenticated"		>
+			<span class="mr-2">Prod.Admin</span>
+			<v-icon>mdi-settings</v-icon>
+		</v-btn>	
 		<v-btn			
 			text
 			@click="onLoginClick" 
@@ -46,7 +47,8 @@
 		>
 			<span class="mr-2">Login</span>
 			<v-icon>mdi-account-circle</v-icon>
-		</v-btn>				
+		</v-btn>	
+					
 		<v-btn			
 			text
 			@click="onLogoutClick"
@@ -54,7 +56,8 @@
 		>
 			<span class="mr-2">Logout </span>
 			<v-icon>mdi-logout</v-icon>
-		</v-btn>	
+		</v-btn>
+		
 		
 	</v-app-bar>
 </template>
@@ -89,14 +92,14 @@ export default {
 		onLogoutClick: function () {
 			this.onLogout();
 		},
-		// onRegisterClick: function () {
-		// 	if (this.currentRouteName != 'Register') {
-		// 		this.$router.push('/register');
-		// 	}
-		// },
 		onLoginClick: function () {	
 			if (this.currentRouteName != 'Login') {
 				this.$router.push('/login');
+			}		
+		},
+		onProdAdminClick:function () {	
+			if (this.currentRouteName != 'ProdAdmin') {
+				this.$router.push('/prodAdmin');
 			}		
 		}
 	}
