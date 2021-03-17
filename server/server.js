@@ -12,6 +12,7 @@ const app = express();
 
 // imports of routes
 const login = require('./routes/login');
+const profile = require('./routes/profile');
 const fields = require('./routes/fields');
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,6 +27,7 @@ app.use(cors({
 //set the routes
 app.use('/api/fields', fields);
 app.use('/api/login', login);
+app.use('/api/profile', profile);
 
 // create the web server running on hard coded port 3000
 const server = app.listen(3000, function () {

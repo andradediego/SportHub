@@ -16,16 +16,16 @@
 			<span class="mr-2">Home</span>
 			<v-icon>mdi-home</v-icon>
 		</v-btn>
+
 		<v-btn			
-			text
-			@click="onAboutClick"
+			text			
+			v-if="isAuthenticated"
+			@click="onProfileClick" 
 		>
-			<span class="mr-2">About</span>
-			<!-- <v-icon>mdi-announcement</v-icon> -->
-			<span class="material-icons">
-				announcement
-			</span>
+			<span class="mr-2">Profile</span>
+			<v-icon>mdi-account-box</v-icon>
 		</v-btn>
+
 		<v-btn			
 			text
 			@click="onProductClick"
@@ -33,12 +33,6 @@
 			<span class="mr-2">Product</span>
 			
 		</v-btn> 
-		<!-- <v-btn
-			text
-			@click="onRegisterClick"
-		>
-					<span class="mr-2">Register</span>
-		</v-btn> -->
 		<v-btn			
 			text
 			@click="onLoginClick" 
@@ -55,7 +49,16 @@
 			<span class="mr-2">Logout </span>
 			<v-icon>mdi-logout</v-icon>
 		</v-btn>	
-		
+		<v-btn			
+			text
+			@click="onAboutClick"
+		>
+			<span class="mr-2">About</span>
+			<!-- <v-icon>mdi-announcement</v-icon> -->
+			<span class="material-icons">
+				announcement
+			</span>
+		</v-btn>
 	</v-app-bar>
 </template>
 <script>
@@ -86,8 +89,16 @@ export default {
 				this.$router.push('/product');
 			}	
 		},
+		onProfileClick: function () {		
+			if (this.currentRouteName != 'Profile') {
+				this.$router.push('/profile');
+			}	
+		},
 		onLogoutClick: function () {
 			this.onLogout();
+				if (this.currentRouteName != 'Home') {
+				this.$router.push('/');
+			}	
 		},
 		// onRegisterClick: function () {
 		// 	if (this.currentRouteName != 'Register') {

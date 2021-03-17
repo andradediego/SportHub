@@ -11,23 +11,34 @@ import * as FieldMutations from './fields/mutations';
 import * as FieldGetters from './fields/getters';
 import * as FieldState from './fields/state';
 
+//login module
+import * as profileActions from './profile/actions';
+import * as profileMutations from './profile/mutations';
+import * as profileGetters from './profile/getters';
+import * as profileState from './profile/state';
+
+
 const state = {
   ...loginState,
+  ...profileState,
   ...FieldState
 };
 
 const mutations = {
   ...loginMutations,
+  ...profileMutations,
   ...FieldMutations
 };
 
 const getters = {
   ...loginGetters,
+  ...profileGetters,
   ...FieldGetters
 };
 
 const actions = {
   ...loginActions,
+  ...profileActions,
   ...FieldActions
 };
 
