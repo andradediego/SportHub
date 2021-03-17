@@ -14,15 +14,15 @@
       >
         <v-tabs-slider color="#13893f"></v-tabs-slider>
         <v-tab>Profile</v-tab>
-        <v-tab>Users</v-tab>
+        <!-- <v-tab>Users</v-tab> -->
       
         <v-tab-item>
           <MainProfile />
         </v-tab-item>
 
-        <v-tab-item>
+        <!-- <v-tab-item>
           <UserSearch />
-        </v-tab-item>
+        </v-tab-item> -->
            
       </v-tabs>
     </v-col>
@@ -31,18 +31,15 @@
 
 <script>
 import MainProfile from '../components/profile/MainProfile';
-import UserSearch from '../components/profile/UserSearch';
+// import UserSearch from '../components/profile/UserSearch';
 export default {
   name: 'Profile',
   components: {
     MainProfile,
-    UserSearch    
+    // UserSearch    
   },
   data: () => ({
-    tab: null,
-    items: [
-      'Profile', 'Users'
-    ],
+    tab: null   
   }),
   methods: {    
     onClickProfile: function () {
