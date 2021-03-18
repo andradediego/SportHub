@@ -33,20 +33,6 @@
     sm="8"
     md="6"
     offset-sm="2"
-    offset-md="3"
-    >
-     <v-date-picker        
-        color="#13893f"
-        full-width 
-        v-model="picker"      
-      ></v-date-picker>
-   </v-col>
-   <v-col
-    cols="12"
-    xs="12"
-    sm="8"
-    md="6"
-    offset-sm="2"
     offset-md="3">
      <v-img 
       src="https://cdn.dribbble.com/users/124813/screenshots/5331224/593-football-players-floydworx_4x.png?compress=1&resize=800x600"

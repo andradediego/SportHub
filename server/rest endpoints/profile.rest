@@ -1,0 +1,38 @@
+POST http://localhost:3000/api/login/login
+Content-Type: application/json
+
+{    
+	"email": "diego@gmail.com",
+	"password": "123456"
+}
+
+###
+
+POST http://localhost:3000/api/profile/getUserProfile
+Content-Type: application/json
+
+{    
+	
+}
+
+###
+
+
+POST http://localhost:3000/api/profile/updateUserProfile
+Content-Type: application/json
+
+{    
+	"name": "Diego Rodrigo de Andrade",
+	"about": "Test new Data",
+	"sports": [ 2, 3 ]  
+}
+
+
+###
+
+POST http://localhost:3000/api/profile/getSports
+Content-Type: application/json
+
+{    
+	
+}

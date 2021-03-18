@@ -14,6 +14,7 @@ CREATE TABLE Login(
 	[Name] [nvarchar](50) NOT NULL,
 	[Email] [nvarchar](50) NOT NULL,
 	[Password] [nvarchar](100) NOT NULL,
+	[About] [nvarchar](500) NOT NULL,
 	[Inactive] [bit] default 0,
 	[RegistrationDate] [datetime] DEFAULT getDate(),
  CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED 
@@ -62,4 +63,21 @@ Create table Friends (
 	[Inactive] [bit] default 0,
 	[RegistrationDate] [datetime] DEFAULT getDate()
 )
+
+
+Create table Sports (
+	[SportId] [int] IDENTITY(1,1) NOT NULL Primary Key,
+	[Sport] [nvarchar](500) NOT NULL,
+	[Inactive] [bit] default 0,
+	[RegistrationDate] [datetime] DEFAULT getDate()
+)
+
+Create table SportsProfile (
+	[SportProfileId] [int] IDENTITY(1,1) NOT NULL Primary Key,
+	[SportId] [int] not null FOREIGN KEY REFERENCES Sports(SportId),
+	[LoginId] [int] not null FOREIGN KEY REFERENCES Login(LoginId),
+	[Inactive] [bit] default 0,
+	[RegistrationDate] [datetime] DEFAULT getDate()
+)
+
 

@@ -2,14 +2,14 @@
   <v-data-table
     :headers="headers"
     :items="efieldGetter"
-    sort-by="calories"
+    sort-by="Name"
     class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar
         flat
       >
-        <v-toolbar-title>Admin Page</v-toolbar-title>
+        <v-toolbar-title>Admin Panel</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -22,13 +22,13 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              color="primary"
+              color="green"
               dark
               class="mb-2"
               v-bind="attrs"
               v-on="on"
             >
-              New Item
+              New Field
             </v-btn>
           </template>
           <v-card>
@@ -41,53 +41,53 @@
                 <v-row>
                   <v-col
                     cols="12"
-                    sm="6"
-                    md="4"
+                    sm="12"
+                    md="12"
                   >
-                    <v-text-field
-                      v-model="editedItem.name"
-                      label="Dessert name"
+                  <v-text-field
+                    v-model="editedItem.Name"
+                    label="Field Name"
+                  ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="12"
+                    md="12"
+                  >
+                  <v-text-field
+                    v-model="editedItem.Location"
+                    label="Location"
                     ></v-text-field>
                   </v-col>
                   <v-col
                     cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="editedItem.calories"
-                      label="Calories"
-                    ></v-text-field>
+                    sm="12"
+                    md="12"
+                  > 
+                  <v-text-field
+                    v-model="editedItem.Description"
+                    label="Description"
+                  ></v-text-field>
                   </v-col>
                   <v-col
                     cols="12"
-                    sm="6"
-                    md="4"
+                    sm="12"
+                    md="12"
                   >
-                    <v-text-field
-                      v-model="editedItem.fat"
-                      label="Fat (g)"
-                    ></v-text-field>
+                  <v-text-field
+                    v-model="editedItem.src"
+                    label="Source"
+                  ></v-text-field>
                   </v-col>
                   <v-col
                     cols="12"
-                    sm="6"
-                    md="4"
+                    sm="12"
+                    md="12"
                   >
-                    <v-text-field
-                      v-model="editedItem.carbs"
-                      label="Carbs (g)"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="editedItem.protein"
-                      label="Protein (g)"
-                    ></v-text-field>
+                  <v-text-field
+                    v-model="editedItem.Inactive"
+                    label="Status"
+                  ></v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -112,17 +112,6 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <v-dialog v-model="dialogDelete" max-width="500px">
-          <v-card>
-            <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-              <v-spacer></v-spacer>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
       </v-toolbar>
     </template>
  <template v-slot:[`item.actions`]="{ item }">
@@ -132,12 +121,6 @@
         @click="editItem(item)"
       >
         mdi-pencil
-      </v-icon>
-      <v-icon
-        small
-        @click="deleteItem(item)"
-      >
-        mdi-delete
       </v-icon>
     </template>
     <template v-slot:no-data>
@@ -156,45 +139,42 @@ import { mapActions, mapGetters } from 'vuex'
   export default {
     data: () => ({
       dialog: false,
-      dialogDelete: false,
-      headers: [
+       headers: [
         { text: 'Name', value: 'Name' },
         { text: 'Location', value: 'Location' },
         { text: 'Description', value: 'Description' },
-        { text: 'SRC', value: 'src' },
+        { text: 'Source', value: 'src' },
+        { text: 'Status', value: 'Inactive' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      desserts: [],
+      eFields: [],
       editedIndex: -1,
       editedItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
+        Name: '',
+        Lcation: '',
+        Description: '',
+        src: '',
+        Inactive: '',
       },
       defaultItem: {
-        name: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0,
+        Name: '',
+        Lcation: '',
+        Description: '',
+        src: '',
+        Inactive: '',
       },
     }),
 
     computed: {
        ...mapGetters(['efieldGetter']),
       formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedIndex === -1 ? 'Field Information' : 'Edit Item'
       },
     },
 
     watch: {
       dialog (val) {
         val || this.close()
-      },
-      dialogDelete (val) {
-        val || this.closeDelete()
       },
     },
 
@@ -205,97 +185,14 @@ import { mapActions, mapGetters } from 'vuex'
         this.loadEFields();
     }, 
     methods: {
-      ...mapActions(['loadEFields']),
+      ...mapActions(['loadEFields', "updateOrSavingFields"]),
       initialize () {
-        this.desserts = [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-          },
-        ]
       },
-
       editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
+        this.editedIndex = this.eFields.indexOf(item)
         this.editedItem = Object.assign({}, item)
+        console.log(item);
         this.dialog = true
-      },
-
-      deleteItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialogDelete = true
-      },
-
-      deleteItemConfirm () {
-        this.desserts.splice(this.editedIndex, 1)
-        this.closeDelete()
       },
 
       close () {
@@ -306,21 +203,27 @@ import { mapActions, mapGetters } from 'vuex'
         })
       },
 
-      closeDelete () {
-        this.dialogDelete = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
 
-      save () {
+      save () {                
+        const upload = {
+          name: this.editedItem.Name,
+          location: this.editedItem.Location,
+          description: this.editedItem.Description,
+          src: this.editedItem.src,
+          inactive: this.editedItem.Inactive == 0 ? false : true,
+          id: this.editedItem.FieldId ? this.editedItem.FieldId : 0
+        };
+        
+        
+        this.updateOrSavingFields(upload);
+
         if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+          Object.assign(this.efieldGetter[this.editedIndex], this.editedItem)
         } else {
-          this.desserts.push(this.editedItem)
+          this.efieldGetter.push(this.editedItem)
         }
         this.close()
+
       },
     },
   }

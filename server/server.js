@@ -12,6 +12,7 @@ const app = express();
 
 // imports of routes
 const login = require('./routes/login');
+const profile = require('./routes/profile');
 const fields = require('./routes/fields');
 const efields = require('./routes/editFields');
 
@@ -28,6 +29,8 @@ app.use(cors({
 app.use('/api/fields', fields);
 app.use('/api/login', login);
 app.use('/api/fieldsEdit', efields);
+app.use('/api/profile', profile);
+
 
 // create the web server running on hard coded port 3000
 const server = app.listen(3000, function () {
