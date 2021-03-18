@@ -1,6 +1,6 @@
  <template>
- <root>
-<v-col
+ <div>
+  <!-- <v-col
     cols="12"
     xs="12"
     sm="8"
@@ -14,6 +14,7 @@
         v-model="picker"      
       ></v-date-picker>
    </v-col>
+   {{fieldGetter}}
    <v-row>
       Available Fields:
    </v-row>
@@ -31,38 +32,28 @@
                 </v-col>
             </template>
         </v-row>  
-   </div>
-   </root>
-    </template>
+   </div>    -->
+   {{getCalendar}}
+   </div> 
+</template>
 
-    <script>
-      import FieldCard from '../components/producs/FieldCard.vue';
-      import { mapActions, mapGetters } from 'vuex';
-    export default {
-     name: 'Calendar',
-      components: {   
-         FieldCard 
-      },
-      data: () => ({
-     picker: null,
-     methods: { ...mapActions(['loadFields']),
-     querySelections (v) {
-      this.loading = true
-      // Simulated ajax query
-      setTimeout(() => {
-        this.items = this.states.filter(e => {
-          return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-        })
-        this.loading = false
-      }, 500)
+<script>
+// import FieldCard from '../components/producs/FieldCard.vue'
+import { mapActions, mapGetters } from 'vuex'
+export default {
+    name: 'Product',    
+    components: {
+        // FieldCard
+    },    
+    methods: {
+        ...mapActions(['loadCalendar']),
     },
-        mounted() {
-        this.loadFields();
+    mounted() {
+        this.loadCalendar();
     }, 
     props:['field'],
     computed: {
-        ...mapGetters(['fieldGetter'])
+        ...mapGetters(['getCalendar'])
     }
-  },
-} ),}
+}
 </script>

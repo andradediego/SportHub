@@ -15,6 +15,8 @@ const login = require('./routes/login');
 const profile = require('./routes/profile');
 const fields = require('./routes/fields');
 const efields = require('./routes/editFields');
+const calendar = require('./routes/calendar');
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
@@ -30,6 +32,7 @@ app.use('/api/fields', fields);
 app.use('/api/login', login);
 app.use('/api/fieldsEdit', efields);
 app.use('/api/profile', profile);
+app.use('/api/calendar', calendar);
 
 
 // create the web server running on hard coded port 3000

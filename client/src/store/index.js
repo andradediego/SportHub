@@ -7,6 +7,7 @@ import * as loginMutations from './login/mutations';
 import * as loginGetters from './login/getters';
 import * as loginState from './login/state';
 
+
 import * as fieldActions from './fields/actions';
 import * as fieldMutations from './fields/mutations';
 import * as fieldGetters from './fields/getters';
@@ -24,32 +25,43 @@ import * as profileGetters from './profile/getters';
 import * as profileState from './profile/state';
 
 
+//calendar module
+import * as calendarActions from './calendar/actions';
+import * as calendarMutations from './calendar/mutations';
+import * as calendarGetters from './calendar/getters';
+import * as calendarState from './calendar/state';
+
+
 const state = {
   ...loginState,
   ...fieldState,
-  ...eFieldState,
-  ...profileState
+  ...eFieldState,  
+  ...profileState,
+  ...calendarState
 };
 
 const mutations = {
   ...loginMutations,
   ...fieldMutations,
   ...eFieldMutations,
-  ...profileMutations
+  ...profileMutations,  
+  ...calendarMutations
 };
 
 const getters = {
   ...loginGetters,
   ...fieldGetters,
   ...eFieldGetters,
-  ...profileGetters
+  ...profileGetters,  
+  ...calendarGetters
 };
 
 const actions = {
   ...loginActions,
   ...fieldActions,
-  ...eFieldActions,
-  ...profileActions
+  ...eFieldActions,  
+  ...profileActions,  
+  ...calendarActions
 };
 
 Vue.use(Vuex)

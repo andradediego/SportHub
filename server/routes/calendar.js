@@ -3,7 +3,7 @@ const sql = require("mssql");
 const config = require('../db_connection/connectionString');
 
 
-router.post('/calendar', async (req, res) => {
+router.post('/getCalendar', async (req, res) => {
 	let pool = await sql.connect(config);		
 	try {
 

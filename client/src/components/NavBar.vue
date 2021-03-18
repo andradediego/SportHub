@@ -31,8 +31,7 @@
 			v-if="isAuthenticated"		>
 			<span class="mr-2">Prod.Admin</span>
 			<v-icon>mdi-settings</v-icon>
-		</v-btn>	
-
+		</v-btn>
 		<v-btn			
 			text
 			@click="onProductClick"
@@ -127,7 +126,8 @@ export default {
 			if (this.currentRouteName != 'Calendar') {
 				this.$router.push('/calendar');
 			}
-		}	
+
+		}
 	}
 }
 </script>
