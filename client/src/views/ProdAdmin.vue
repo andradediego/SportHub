@@ -188,8 +188,8 @@ import { mapActions, mapGetters } from 'vuex'
       ...mapActions(['loadEFields', "updateOrSavingFields"]),
       initialize () {
       },
-      editItem (item) {
-        this.editedIndex = this.eFields.indexOf(item)
+      editItem (item) {        
+        this.editedIndex = this.efieldGetter.indexOf(item)
         this.editedItem = Object.assign({}, item)
         console.log(item);
         this.dialog = true
@@ -216,7 +216,7 @@ import { mapActions, mapGetters } from 'vuex'
         
         
         this.updateOrSavingFields(upload);
-
+        debugger;
         if (this.editedIndex > -1) {
           Object.assign(this.efieldGetter[this.editedIndex], this.editedItem)
         } else {
