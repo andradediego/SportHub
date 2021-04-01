@@ -58,6 +58,5 @@ export const onRegister = async ({commit}, payload) => {
 	} catch (error) {
 		console.log(error);
 		
-		console.log("ERRORR");
 	}
 }

@@ -84,10 +84,10 @@
                     sm="12"
                     md="12"
                   >
-                  <v-text-field
+                  <v-switch
                     v-model="editedItem.Inactive"
-                    label="Status"
-                  ></v-text-field>
+                    :label="` Inactive: ${editedItem.Inactive.toString()}`"
+                  ></v-switch>
                   </v-col>
                 </v-row>
               </v-container>
@@ -144,11 +144,12 @@ import { mapActions, mapGetters } from 'vuex'
         { text: 'Location', value: 'Location' },
         { text: 'Description', value: 'Description' },
         { text: 'Source', value: 'src' },
-        { text: 'Status', value: 'Inactive' },
+        { text: 'Is Innactive', value: 'Inactive' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       eFields: [],
       editedIndex: -1,
+      switch1: false,
       editedItem: {
         Name: '',
         Lcation: '',
@@ -191,7 +192,7 @@ import { mapActions, mapGetters } from 'vuex'
       editItem (item) {        
         this.editedIndex = this.efieldGetter.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        console.log(item);
+        //console.log(item);
         this.dialog = true
       },
 
@@ -216,7 +217,6 @@ import { mapActions, mapGetters } from 'vuex'
         
         
         this.updateOrSavingFields(upload);
-        debugger;
         if (this.editedIndex > -1) {
           Object.assign(this.efieldGetter[this.editedIndex], this.editedItem)
         } else {

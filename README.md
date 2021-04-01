@@ -55,4 +55,4 @@ nodemon server.js
 The prompt will display the access URL.
 
 ## Notes
-The product page has not been finalized due to the high complexity in the configuration and implementation of the login page with modern authentication parameters. Unfortunately the search process for secure authentication methods and the correct way to implement them took us a lot of time in that first sprint.
+some database adjustments need to be made on the admin page, as well as the calendar. 

@@ -11,7 +11,7 @@ router.post('/prodAdmin', async (req, res) => {
 		let { recordset } = await pool.request()
 			.query('select * from Fields');    
 		return res.json({
-			message: 'I got it',
+			message: 'Success',
 			data: recordset,
 		});
 		
@@ -36,55 +36,56 @@ router.post('/prodInsert', async (req, res) => {
 				message: 'Invalid data'
 			});
 		}
-		
+		console.log(data);
 		if (data.id == 0) {
-
-			console.log('New data')
+		//Add New Field
+			//console.log('New data')
 			let {recordset} = await pool.request()
 			.input('name', sql.NVarChar(100), data.name)
 			.query('select * from Fields where Name = @name');
 
-			if (recordset.length > 0) {
-				return res.status(400).send({
-				message: 'Field already register'
+			if (recordset.length > 0) { 
+				return res.json({
+					message: 'Field Duplicated'
 				});
 			}
+				const insertQuery = `
+					insert into Fields (Name, Location, Description, src, Inactive) 
+					values (@name, @location, @description, @src, @inactive);
+					SELECT SCOPE_IDENTITY() AS name;
+				`
 
-			const insertQuery = `
-				insert into Fields (Name, Location, Description, src, Inactive) 
-				values (@name, @location, @description, @src, @inactive);
-				SELECT SCOPE_IDENTITY() AS id;
-			`
+				let newField = await pool.request()
+				.input('Name', sql.NVarChar(100), data.name)
+				.input('Location', sql.NVarChar(200), data.location)
+				.input('Description', sql.NVarChar(500), data.description)
+				.input('src', sql.NVarChar(500), data.src)
+				.input('inactive', sql.Bit, data.inactive)			
+				.query(insertQuery);
 
-			let newUser = await pool.request()
-			.input('Name', sql.NVarChar(100), data.name)
-			.input('Location', sql.NVarChar(200), data.location)
-			.input('Description', sql.NVarChar(500), data.description)
-			.input('src', sql.NVarChar(500), data.src)
-			.input('inactive', sql.Bit, data.inactive)			
-			.query(insertQuery);
-
-			if (newUser.recordset.length == 0) {
-				return res.status(500).send({
-					message: 'Sorry we cannot process your data right now, please try again later'
+	
+				
+				return res.json({
+					message: 'New Field Added!',
+					data: newField
 				});
-			}
-			console.log(newUser);
 			
-			return res.json({
-				message: 'Updated Changes!',
-			});
 		} else {
-
-			console.log('Edit data')
+			//Edit Existing Field
 
 			let {recordset} = await pool.request()
 				.input('name', sql.NVarChar(100), data.name)
-				.query('select * from Fields where Name = @name');
+				.input('location', sql.NVarChar(200), data.location)
+				.input('description', sql.NVarChar(500), data.description)
+				.input('src', sql.NVarChar(500), data.src)
+				.input('inactive', sql.Bit, data.inactive)
+				.input('id', sql.Int, data.id)
+				.query('select * from Fields where Name = @name and Location = @location and Description = @description and src = @src and Inactive = @inactive');
+		
 
 			if (recordset.length > 0) {
 				return res.status(400).send({
-					message: 'Field already register'
+					message: 'Field already registred'
 				});
 			}
 
@@ -94,7 +95,7 @@ router.post('/prodInsert', async (req, res) => {
 			where fieldId = @id			
 			`
 
-			let updatedUser = await pool.request()
+			let updatedField = await pool.request()
 			.input('name', sql.NVarChar(100), data.name)
 			.input('location', sql.NVarChar(200), data.location)
 			.input('description', sql.NVarChar(500), data.description)
@@ -103,20 +104,11 @@ router.post('/prodInsert', async (req, res) => {
 			.input('id', sql.Int, data.id)
 			.query(insertQuery);
 
-
-			// if (updatedUser.recordset.length == 0) {
-			// 	return res.status(500).send({
-			// 		message: 'Sorry we cannot process your data right now, please try again later'
-			// 	});
-			// }
-
 			return res.json({
 				message: 'Succesfull Insert!',
-				data: updatedUser
+				data: updatedField
 			});
-		}
-
-		
+		}	
 		
 	} catch (error) {
 		return res.status(500).send({
@@ -126,11 +118,5 @@ router.post('/prodInsert', async (req, res) => {
 		pool.close();
 	}
 });
-
-
-
-
-
-
 
 module.exports = router;
