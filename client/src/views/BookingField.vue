@@ -11,14 +11,21 @@
       </div>
       
       <div>
-        <v-btn depressed color="primary" class="add">
-        Add to card
+        <v-btn depressed color="primary" class="add"
+        @click="addToCart()"
+        >
+        Add to cart
         </v-btn>
 
         <v-btn depressed color="error">
         Cancel
         </v-btn>
       </div>
+      <div class="fb">
+       <p>Feedback:</p> 
+        <input type="text" placeholder="How your experience about our factilities" col="50">
+      </div>
+     
 </div>
 </template>
 <script>
@@ -47,6 +54,10 @@ export default {
 }
 .add{
   margin-right:15px;
+}
+.fb{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 </style>

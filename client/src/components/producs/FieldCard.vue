@@ -16,7 +16,7 @@
             <div>{{field.Location}}</div>
         </v-card-text>
         <v-card-subtitle class="black--text">
-            <div>{{field.Description}}</div>            
+            <div> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</div>            
         </v-card-subtitle>
         
         <v-btn class="grey lighten-3">
