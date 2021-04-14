@@ -8,7 +8,8 @@ export const onLogin = async ({commit}, payload) => {
 			password: payload.password
 		});
 		
-		if (result) {
+		if (result) {			
+			commit('setIsAdmin', result.data.data.isAdmin);
 			commit('setIsAuthenticated', true);
 			router.push('/');
 		}
@@ -22,7 +23,8 @@ export const onLogout = async ({commit}) => {
 		const result = await axios.post('http://localhost:3000/api/login/logout');
 		
 		if (result) {
-			commit('setIsAuthenticated', false);		
+			commit('setIsAuthenticated', false);
+			commit('resetStore');		
 		}
 	} catch (error) {
 		console.log(error);
@@ -50,10 +52,8 @@ export const onRegister = async ({commit}, payload) => {
 		});
 		
 		if (result) {
-			commit('setIsAuthenticated', true);
-			router.push('/');
-			
-		console.log("SUCESS");
+			commit('setIsAuthenticated', false);
+			router.push('/login');
 		}
 	} catch (error) {
 		console.log(error);

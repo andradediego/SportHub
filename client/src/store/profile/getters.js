@@ -9,3 +9,19 @@ export const isEditMode = state => {
 export const sportsData = state => {
 	return state.profileState.sports;
 }
+
+export const isLoadingProfile = state => {
+	return state.profileState.isLoadingProfile;
+}
+
+export const findUser = state => {
+	return state.profileState.findUser;
+}
+
+export const userSearchProfile = state => {
+	return state.profileState.userSearchProfile;
+}
+
+export const userFriends = state => {
+	return [...state.profileState.userFriends];
+}

@@ -36,7 +36,7 @@ router.post('/prodInsert', async (req, res) => {
 				message: 'Invalid data'
 			});
 		}
-		console.log(data);
+		// console.log(data);
 		if (data.id == 0) {
 		//Add New Field
 			//console.log('New data')
