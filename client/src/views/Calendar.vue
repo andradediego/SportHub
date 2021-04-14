@@ -43,7 +43,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'Product',    
     components: {
-        // FieldCard
+       
     },    
     methods: {
         ...mapActions(['loadCalendar']),

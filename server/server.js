@@ -14,6 +14,7 @@ const app = express();
 const login = require('./routes/login');
 const profile = require('./routes/profile');
 const fields = require('./routes/fields');
+const bookingField = require('./routes/bookingFields');
 const efields = require('./routes/editFields');
 const calendar = require('./routes/calendar');
 
@@ -28,7 +29,9 @@ app.use(cors({
 }));
 
 //set the routes
+//app.use('/api/bookingField, const import route)
 app.use('/api/fields', fields);
+app.use('/api/bookingField', bookingField);
 app.use('/api/login', login);
 app.use('/api/fieldsEdit', efields);
 app.use('/api/profile', profile);

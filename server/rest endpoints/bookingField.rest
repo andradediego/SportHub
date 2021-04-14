@@ -1,0 +1,18 @@
+POST http://localhost:3000/api/bookingField/bookingField
+// http://localhost:3000/server.js/bookingFields.js
+//server.js -> api/bookingField/ 
+//bookingFields.js -> router.post(/bookingField)
+Content-Type: application/json
+
+{
+	
+}
+
+###
+
+POST http://localhost:3000/api/fieldsEdit/prodAdmin
+Content-Type: application/json
+
+{
+	
+}

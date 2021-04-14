@@ -1,4 +1,4 @@
-<template class="field">
+<template class="booking">
     <v-card             
         dark            
         color="#ffffff"
@@ -6,36 +6,29 @@
         width="500"
         >        
         <v-img
-            :src="field.src"
+            :src="bookField.src"
             height="200px"            
         ></v-img>
         <v-card-title class="black--text" >
-            <div>{{field.Name}}</div>
+            <div>{{bookField.Name}}</div>
         </v-card-title>
         <v-card-text class="black--text">
-            <div>{{field.Location}}</div>
+            <div>{{bookField.Location}}</div>
         </v-card-text>
         <v-card-subtitle class="black--text">
-            <div>{{field.Description}}</div>            
+            <div>{{bookField.Description}}</div>
         </v-card-subtitle>
-        
-        <v-btn class="grey lighten-3">
-              <router-link  class="ma-2 black--text text-decoration-none" :to="'/bookingField/' + field.FieldId ">Booking</router-link>
-        </v-btn>
-     <!-- <v-btn class="black--text" color="#ffffff" @click="onclickProduct">Booking</v-btn>-->
     </v-card>
 </template>
 <script>
 import {mapActions} from 'vuex'
 export default {
-    name: 'FieldCard',
-    props: ['field'],
+    name: 'booking',
+    props: ['bookField'],
     data: () => ({
     }),    
     methods: {
-        ...mapActions(['loadFields']),
-        onclickProduct: function (){            
-        }
+        ...mapActions(['loadBookingFields']),
     },
     computed: {        
     }
