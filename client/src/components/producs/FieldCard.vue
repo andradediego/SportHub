@@ -20,7 +20,13 @@
         </v-card-subtitle>
         
         <v-btn class="grey lighten-3">
-              <router-link  class="ma-2 black--text text-decoration-none" :to="'/bookingField/' + field.FieldId ">Booking</router-link>
+              <router-link  class="ma-2 black--text text-decoration-none" 
+              :to="{ name:'bookingField', 
+              params:{id:field.FieldId, 
+                        name:field.Name,
+                        src:field.src,
+                        location:field.Location,
+                        des:field.Description}}">Booking</router-link>
         </v-btn>
      <!-- <v-btn class="black--text" color="#ffffff" @click="onclickProduct">Booking</v-btn>-->
     </v-card>
