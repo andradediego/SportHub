@@ -8,10 +8,10 @@ router.post('/getCalendar', async (req, res) => {
 	try {
 
 		let { recordset } = await pool.request()
-			.query('select Name from Fields where Inactive = 0');    
+			.query('select * from Fields, BookFields where BookFields.Inactive = 0 AND EXISTS (SELECT RegistrationDate FROM BookFields);');    
 		
 		return res.json({
-			message: 'I got it',
+			message: 'I got it 123',
 			data: recordset,
 		});
 		
