@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import router from '../../router';
+//import router from '../../router';
 
 export const loadBookingFields = async ({commit}) => {	
 	try {
@@ -12,3 +12,17 @@ export const loadBookingFields = async ({commit}) => {
 	}
 }	
 
+export const onBooking = async ({dispatch, commit}, payload) => {
+	try {
+	
+		const result = await axios.post('http://localhost:3000/api/bookingField/onBooking', payload);
+	
+		if (result) {
+			await dispatch('onBooking');
+			commit;
+
+		}
+	} catch (error) {
+		error;
+	}
+}

@@ -9,12 +9,15 @@
         <h2>{{location}}</h2>
         <h3>{{des}}</h3> 
       </div>
-      
+        <v-row class="left">
+    <v-date-picker v-model="picker1"></v-date-picker>
+    <v-date-picker v-model="picker2"></v-date-picker>
+  </v-row>
       <div>
         <v-btn depressed color="primary" class="add"
-        @click="addToCart()"
+        @click="booking"
         >
-        Add to cart
+        Book
         </v-btn>
 
         <v-btn depressed color="error">
@@ -29,6 +32,7 @@
 </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
     name: 'bookingField', 
     
@@ -38,11 +42,24 @@ export default {
        name:  this.$route.params.name,
        src:this.$route.params.src,
        location: this.$route.params.location,
-       des: this.$route.params.des
+       des: this.$route.params.des,
+       picker1: new Date().toISOString().substr(0, 10),
+       picker2: new Date().toISOString().substr(0, 10),
       };
     },  
     mounted(){
+    },
+      methods: {
+   ...mapActions(['onBooking']),
+    booking: function () {
+      const bookingData = {
+       id : this.$route.params.id,
+       datePick1: this.picker1,
+       datePick2: this.picker2,
+      }
+      this.onBooking(bookingData);
     }
+  }
     
 }
 </script>
