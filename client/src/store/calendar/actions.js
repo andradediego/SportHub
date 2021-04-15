@@ -4,8 +4,7 @@ import axios from 'axios';
 export const loadCalendar = async ({commit}) => {	
 	try {
 		const result = await axios.post('http://localhost:3000/api/calendar/getCalendar');		
-		if (result) {
-			console.log(result);
+		if (result) {			
 			commit('setCalendar', result.data.data);
 		}
 	} catch (error) {

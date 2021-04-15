@@ -1,3 +1,3 @@
 export const calendarState = {
-	calendar: null
+	calendar: []
 }

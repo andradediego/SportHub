@@ -140,7 +140,7 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex'
   export default {
     data: () => ({
       focus: '',
@@ -160,12 +160,12 @@
       descriptions: [],
     }),
     mounted () {
-      this.loadCalendar();
+      // this.loadCalendar();
       this.$refs.calendar.checkChange();
     //   console.log(this.getCalendar[0].Name);
     },
     methods: {
-      ...mapActions(['loadCalendar']),
+      // ...mapActions(['loadCalendar']),
       bookField(){
         window.location.href = '/login';
       },
