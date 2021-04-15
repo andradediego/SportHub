@@ -55,4 +55,4 @@ nodemon server.js
 The prompt will display the access URL.
 
 ## Notes
-some database adjustments need to be made on the admin page, as well as the calendar. 
+Sprint 3 Complete.
