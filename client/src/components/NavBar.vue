@@ -28,7 +28,7 @@
 		<v-btn			
 			text
 			@click="onProdAdminClick" 
-			v-if="isAuthenticated"		>
+			v-if="isAdmin"		>
 			<span class="mr-2">Prod.Admin</span>
 			<v-icon>mdi-settings</v-icon>
 		</v-btn>
@@ -84,7 +84,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
 	name: 'NavBar',
 	computed: {
-		...mapGetters(['isAuthenticated']),
+		...mapGetters(['isAuthenticated', 'isAdmin']),
 		currentRouteName() {
 			return this.$route.name;
     }

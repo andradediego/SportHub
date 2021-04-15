@@ -7,12 +7,14 @@
             <v-text-field
               label="Full Name"
               v-model="name"
+              :loading="isLoadingProfile"
             >
             </v-text-field>
             <v-textarea
 							name="input-7-1"
 							label="About"
 							v-model="about"
+              :loading="isLoadingProfile"
 							hint="Tell us about yourself..."
 						></v-textarea>
 						<v-combobox						
@@ -20,6 +22,7 @@
 							:items="sportsData"
               item-text="sport" 
               v-model="sportsSelected"
+              :loading="isLoadingProfile"
 							multiple
 							chips
 						></v-combobox>           
@@ -56,10 +59,7 @@ export default {
     sportsSelected: []
   }),
   computed: {
-    ...mapGetters(['sportsData']),
-    sports: function () {
-      return ['Baseball', 'Basketball', 'Hockey', 'Soccer', 'Football'];
-    }
+    ...mapGetters(['sportsData', 'isLoadingProfile'])    
   },
   methods: {
     ...mapMutations(['setIsEditMode']),

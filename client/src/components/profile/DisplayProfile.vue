@@ -2,7 +2,7 @@
   <v-row>
 		<v-col>
 			<v-card flat>				
-				<h1 class="text-center font mt-8">{{userName}}</h1>						
+				<h1 class="text-center font mt-8">{{userData.name}}</h1>						
 				<!-- <v-img
 					height="200px"
 					src="https://cdn.pixabay.com/photo/2020/07/12/07/47/bee-5396362_1280.jpg"
@@ -21,7 +21,7 @@
 				</v-img> -->
 				<v-card-title>About</v-card-title>
 				<v-card-text>
-					{{userAbout}}
+					{{userData.about}}					
 				</v-card-text>
 
 				<v-card-title>Interest in</v-card-title>
@@ -30,7 +30,7 @@
 					<v-chip-group							
 						column
 					>
-						<v-chip v-for="interest in userInterest"
+						<v-chip v-for="interest in userData.sports"
 							outlined
 							color="#13893f"
 							:key="interest.id"
@@ -38,7 +38,7 @@
 							{{interest.sport}}
 						</v-chip>
 					</v-chip-group>
-				</v-card-text>				
+				</v-card-text>
       </v-card>
 		</v-col>
 	</v-row>
@@ -49,21 +49,11 @@
 export default {
   name: 'DisplayProfile',
 	props: {
-		userName: {
-			type: String,
+		userData: {
+			type: Object,
       required: true,
-			default: ''
-		},		
-		userAbout: {
-			type: String,
-      required: true,
-			default: ''
-		},
-		userInterest: {
-			type: Array,
-      required: true,
-			default: function () { return [] }
-		}
+			default: () => {}
+		}		
 	},
 
   components: {
