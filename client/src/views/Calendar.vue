@@ -1,59 +1,257 @@
- <template>
- <div>
-  <!-- <v-col
-    cols="12"
-    xs="12"
-    sm="8"
-    md="6"
-    offset-sm="2"
-    offset-md="3"
-    >
-     <v-date-picker        
-        color="#13893f"
-        full-width 
-        v-model="picker"      
-      ></v-date-picker>
-   </v-col>
-   {{fieldGetter}}
-   <v-row>
-      Available Fields:
-   </v-row>
-   <div class="product" >
-        <v-row>
-            <template v-for="field in fieldGetter">
-                <v-col :key="field.id"
-                    cols="12"                    
-                    sm="12"
-                    md="4"
-                >
-                <FieldCard class="fieldCard" 
-                    :field="field"
-                    />                
-                </v-col>
+<template>
+     <v-row class="fill-height">
+    <v-col>
+      <v-sheet height="64">
+        <v-toolbar
+          flat
+        >
+          <v-btn
+            outlined
+            class="mr-4"
+            color="grey darken-2"
+            @click="setToday"
+          >
+            Today
+          </v-btn>
+          <v-btn
+            fab
+            text
+            small
+            color="grey darken-2"
+            @click="prev"
+          >
+            <v-icon small>
+              mdi-chevron-left
+            </v-icon>
+          </v-btn>
+          <v-btn
+            fab
+            text
+            small
+            color="grey darken-2"
+            @click="next"
+          >
+            <v-icon small>
+              mdi-chevron-right
+            </v-icon>
+          </v-btn>
+          <v-toolbar-title v-if="$refs.calendar">
+            {{ $refs.calendar.title }}
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-menu
+            bottom
+            right
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                outlined
+                color="grey darken-2"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <span>{{ typeToLabel[type] }}</span>
+                <v-icon right>
+                  mdi-menu-down
+                </v-icon>
+              </v-btn>
             </template>
-        </v-row>  
-   </div>    -->
-   {{getCalendar}}
-   </div> 
+            <v-list>
+              <v-list-item @click="type = 'day'">
+                <v-list-item-title>Day</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'week'">
+                <v-list-item-title>Week</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'month'">
+                <v-list-item-title>Month</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = '4day'">
+                <v-list-item-title>4 days</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-toolbar>
+      </v-sheet>
+      <v-sheet height="600">
+        <v-calendar
+          ref="calendar"
+          v-model="focus"
+          color="primary"
+          :events="events"
+          :event-color="getEventColor"
+          :type="type"
+          @click:event="showEvent"
+          @click:more="viewDay"
+          @click:date="viewDay"
+          @change="updateRange"          
+        ></v-calendar>
+        <v-menu
+          v-model="selectedOpen"
+          :close-on-content-click="false"
+          :activator="selectedElement"
+          offset-x
+        >
+          <v-card
+            color="grey lighten-4"
+            min-width="350px"
+            flat
+          >
+            <v-toolbar
+              :color="selectedEvent.color"
+              dark
+            >
+              <v-btn icon>
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+              <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn icon>
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+              <v-btn icon>
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </v-toolbar>
+            <v-card-text>
+              <span v-html="selectedEvent.description"></span><br/>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn
+                text
+                color="secondary"
+                @click="bookField"
+              >
+                Book Now
+              </v-btn>
+              <v-btn
+                text
+                color="secondary"
+                @click="selectedOpen = false"
+              >
+                Close
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
+      </v-sheet>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-// import FieldCard from '../components/producs/FieldCard.vue'
-import { mapActions, mapGetters } from 'vuex'
-export default {
-    name: 'Product',    
-    components: {
-        // FieldCard
-    },    
-    methods: {
-        ...mapActions(['loadCalendar']),
+  import { mapActions, mapGetters } from 'vuex'
+  export default {
+    data: () => ({
+      focus: '',
+      type: 'month',
+      typeToLabel: {
+        month: 'Month',
+        week: 'Week',
+        day: 'Day',
+        '4day': '4 Days',
+      },
+      selectedEvent: {},
+      selectedElement: null,
+      selectedOpen: false,
+      events: [],
+      colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
+      names: [],
+      descriptions: [],
+    }),
+    mounted () {
+      this.loadCalendar();
+      this.$refs.calendar.checkChange();
+    //   console.log(this.getCalendar[0].Name);
     },
-    mounted() {
-        this.loadCalendar();
-    }, 
-    props:['field'],
+    methods: {
+      ...mapActions(['loadCalendar']),
+      bookField(){
+        window.location.href = '/login';
+      },
+      viewDay ({ date }) {
+        this.focus = date
+        this.type = 'day'
+      },
+      getEventColor (event) {
+        return event.color
+      },
+      setToday () {
+        this.focus = ''
+      },
+      prev () {
+        this.$refs.calendar.prev()
+      },
+      next () {
+        this.$refs.calendar.next()
+      },
+      showEvent ({ nativeEvent, event }) {
+        
+        const open = () => {
+          this.selectedEvent = event
+          this.selectedElement = nativeEvent.target
+          setTimeout(() => {
+            this.selectedOpen = true
+          }, 10)
+        }
+
+        if (this.selectedOpen) {
+          this.selectedOpen = false
+          setTimeout(open, 10)
+        } else {
+          open()
+        }
+
+        nativeEvent.stopPropagation()
+      },
+      updateRange () {  //{ start, end }
+        const events = []
+
+        //  const min = new Date(`${start.date} 09:00:00`)
+        //  const max = new Date(`${end.date} 18:59:59`)
+        // const days = (max.getTime() - min.getTime()) / 86400000
+        
+        
+         for(var j in this.getCalendar)
+      {
+          this.names.push(this.getCalendar[j].Name)
+          this.descriptions.push(this.getCalendar[j].Description)
+      }
+      console.log(this.getCalendar)
+        //const eventCount = 20;
+
+
+        for (let i = 0; i < this.getCalendar.length; i++) {
+          const allDay = 0
+          //const firstTimestamp = ;
+          // const firstTimestamp = this.rnd(min.getTime(), max.getTime())
+          const first = new Date(this.getCalendar[i].BookDateStart)
+          //const secondTimestamp = 
+          // const secondTimestamp = this.rnd(3, allDay ? 288 : 8) * 900000
+          const second = new Date(this.getCalendar[i].BookDateFinish)
+
+          events.push({ 
+            name: this.names[i],
+            start: first,
+            end: second,
+            color: this.colors[this.rnd(0, this.colors.length - 1)],
+            timed: !allDay,
+            description: this.descriptions[i],
+          })
+          // console.log(this.getCalendar)
+        }
+
+        this.events = events
+        // console.log(events)
+      },
+      rnd (a, b) {
+        return Math.floor((b - a + 1) * Math.random()) + a
+      },
+    },
+    props:['calendar'],
     computed: {
-        ...mapGetters(['getCalendar'])
-    }
-}
+        ...mapGetters(['getCalendar']),
+   }
+  }
+
 </script>
