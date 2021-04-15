@@ -34,6 +34,13 @@
 		</v-btn>
 		<v-btn			
 			text
+			@click="onCalendarClick"
+		>
+			<span class="mr-2">Available Fields</span>
+			<v-icon>calendar_today</v-icon>
+		</v-btn>
+		<v-btn			
+			text
 			@click="onProductClick"
 		>
 			<span class="mr-2">Product</span>
