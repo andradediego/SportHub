@@ -16,9 +16,19 @@
             <div>{{field.Location}}</div>
         </v-card-text>
         <v-card-subtitle class="black--text">
-            <div>{{field.Description}}</div>
+            <div> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</div>            
         </v-card-subtitle>
-        <v-btn class="black--text" color="#ffffff" @click="onclickProduct">Booking</v-btn>
+        
+        <v-btn class="grey lighten-3">
+              <router-link  class="ma-2 black--text text-decoration-none" 
+              :to="{ name:'bookingField', 
+              params:{id:field.FieldId, 
+                        name:field.Name,
+                        src:field.src,
+                        location:field.Location,
+                        des:field.Description}}">Booking</router-link>
+        </v-btn>
+     <!-- <v-btn class="black--text" color="#ffffff" @click="onclickProduct">Booking</v-btn>-->
     </v-card>
 </template>
 <script>
@@ -38,7 +48,5 @@ export default {
 }
 </script>
 <style>
-.text{
-    color:black !important;
-}
+
 </style>
